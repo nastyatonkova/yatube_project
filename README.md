@@ -11,6 +11,11 @@ Social Net for bloggers
 ``` 
 pip install -r requirements.txt
 ```
+- proceed the command in folder with manage.py
+``` 
+python3 manage.py runserver
+```
+
 
 ## Markdown Service
 - Dillinger
