@@ -1,12 +1,18 @@
-# from django.shortcuts import render
+from django.shortcuts import render
 
 # Create your views here.
 
 from django.http import HttpResponse
 
+import os
+
+#  'posts/index.html' for MAC and 'posts-index.html' for WIN
+PATH_TEMPLATE = os.path.join('posts', 'index.html')  
+
 
 def index(request):
-    return HttpResponse('<i>Main page<i>')
+    template = PATH_TEMPLATE
+    return render(request, template)
 
 
 def group_list(request):
