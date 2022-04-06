@@ -6,12 +6,12 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse('Main page')
+    return HttpResponse('<i>Main page<i>')
 
 
 def group_list(request):
     return HttpResponse('List of posts grouped by groups')
 
 
-def group_posts(request, pk):
-    return HttpResponse(f'Group number {pk}')
+def group_posts(request, slug):
+    return HttpResponse(f'Group number {slug}')
