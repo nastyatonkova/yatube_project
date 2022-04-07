@@ -1,22 +1,31 @@
-from django.shortcuts import render
-
 # Create your views here.
-
+from django.shortcuts import render
 from django.http import HttpResponse
-
 import os
 
 #  'posts/index.html' for MAC and 'posts-index.html' for WIN
-PATH_TEMPLATE = os.path.join('posts', 'index.html')  
+PATH_TO_INDEX = os.path.join('posts', 'index.html')
+PATH_TO_GROUP_LIST = os.path.join('posts', 'group_list.html')
 
 
 def index(request):
-    template = PATH_TEMPLATE
-    return render(request, template)
+    template = PATH_TO_INDEX
+    title_dict = 'Main page for project Yatube'
+    # Dictionary
+    context = {
+        'title_dict': title_dict
+    }
+    return render(request, template, context)
 
 
 def group_list(request):
-    return HttpResponse('List of posts grouped by groups')
+    template = PATH_TO_GROUP_LIST
+    title_dict = 'Information about groups of project Yatube'
+    # Dictionary
+    context = {
+        'title_dict': title_dict
+    }
+    return render(request, template, context)
 
 
 def group_posts(request, slug):
