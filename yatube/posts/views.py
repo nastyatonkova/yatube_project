@@ -1,32 +1,31 @@
 # Create your views here.
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from .models import Post, Group
 import os
 
-#  'posts/index.html' for MAC and 'posts-index.html' for WIN
 PATH_TO_INDEX = os.path.join('posts', 'index.html')
 PATH_TO_GROUP_LIST = os.path.join('posts', 'group_list.html')
 
 
-def index(request):
+def index(request) -> None:
+    """Return main page."""
     template = PATH_TO_INDEX
     title_dict = 'Main page for project Yatube'
-    # Dictionary
+    posts = Post.objects.order_by('-pub_date')[:10]
     context = {
-        'title_dict': title_dict
+        'title_dict': title_dict,
+        'posts': posts
     }
     return render(request, template, context)
 
 
-def group_list(request):
+def group_posts(request, slug) -> None:
+    """View-function for group page."""
     template = PATH_TO_GROUP_LIST
-    title_dict = 'Information about groups of project Yatube'
-    # Dictionary
+    group = get_object_or_404(Group, slug=slug)
+    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
     context = {
-        'title_dict': title_dict
+        'group': group,
+        'posts': posts,
     }
     return render(request, template, context)
-
-
-def group_posts(request, slug):
-    return HttpResponse(f'Group number {slug}')
